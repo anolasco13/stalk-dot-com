@@ -1,0 +1,16 @@
+.note {
+  position: relative;
+  max-width: 360px;
+  margin: 8px auto;
+  padding: 22px 26px;
+  background: #f1ece2;
+  color: var(--ink-soft);
+  font-style: italic;
+  transform: rotate(-1.5deg);
+  box-shadow: 2px 3px 8px rgba(40, 32, 24, 0.18);
+  filter: url(#torn);
+}
+
+.note p {
+  margin: 0;
+}

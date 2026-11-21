@@ -1,0 +1,21 @@
+.tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  z-index: 2;
+  width: 92px;
+  height: 26px;
+  transform: translateX(-50%) rotate(var(--tape-tilt, 0deg));
+
+  /* Slightly see-through black tape with faint fibers running along it. */
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 7px),
+    linear-gradient(180deg, rgba(40, 36, 34, 0.9), rgba(18, 16, 15, 0.86));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+
+  /* Ragged, hand-torn ends. */
+  clip-path: polygon(
+    0% 8%, 4% 0%, 7% 14%, 3% 30%, 6% 48%, 2% 66%, 5% 84%, 1% 100%,
+    96% 100%, 100% 88%, 95% 72%, 99% 55%, 94% 38%, 98% 20%, 95% 6%, 99% 0%
+  );
+}

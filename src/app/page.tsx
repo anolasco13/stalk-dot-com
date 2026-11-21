@@ -1,6 +1,8 @@
 import { site } from "@/config";
 import { getRecentFilms } from "@/lib/letterboxd";
 import { getRecentPins } from "@/lib/pinterest";
+import FilmCard from "@/components/FilmCard";
+import EmptyNote from "@/components/EmptyNote";
 import styles from "./page.module.css";
 
 export default async function Home() {
@@ -21,8 +23,15 @@ export default async function Home() {
           </h2>
           <span className={styles.sectionNote}>via letterboxd</span>
         </div>
-        {/* Film cards arrive in the next chunk. */}
-        <p className={styles.placeholder}>{films.length} films found.</p>
+        {films.length > 0 ? (
+          <div className={styles.films}>
+            {films.map((film, i) => (
+              <FilmCard key={film.id} film={film} index={i} />
+            ))}
+          </div>
+        ) : (
+          <EmptyNote>nothing here yet… check back after the next movie night.</EmptyNote>
+        )}
       </section>
 
       <section className={styles.section} aria-labelledby="pinned">
