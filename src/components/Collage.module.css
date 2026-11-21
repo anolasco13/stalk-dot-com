@@ -1,0 +1,38 @@
+/* Columns and rows must match DESKTOP and PHONE in src/lib/collage.ts. */
+.collage {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(var(--rows), 20px);
+  padding-top: 18px; /* room for the tape on the top cards */
+  padding-bottom: 140px; /* the last polaroids hang below their rows */
+}
+
+.film {
+  grid-column: var(--col);
+  grid-row: var(--row);
+  justify-self: var(--justify, center);
+  align-self: start;
+  z-index: 2;
+  width: 100%;
+  max-width: 210px;
+}
+
+/* Lift a polaroid above its neighbours while it's hovered or focused. */
+.film:hover,
+.film:focus-within {
+  z-index: 6;
+}
+
+@media (max-width: 700px) {
+  .collage {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(var(--rows-sm), 20px);
+  }
+
+  .film {
+    grid-column: var(--col-sm);
+    grid-row: var(--row-sm);
+    max-width: none;
+  }
+}

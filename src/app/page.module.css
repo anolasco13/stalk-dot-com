@@ -67,33 +67,6 @@
   white-space: nowrap;
 }
 
-/* ---------- recently watched ---------- */
-.films {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 52px 36px;
-  padding-top: 14px; /* room for the tape */
-}
-
-@media (max-width: 900px) {
-  .films {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 44px 28px;
-  }
-}
-
-@media (max-width: 480px) {
-  .films {
-    grid-template-columns: 1fr;
-    max-width: 280px;
-    margin: 0 auto;
-  }
-}
-
-.placeholder {
-  color: var(--ink-soft);
-}
-
 /* ---------- footer ---------- */
 .footer {
   margin-top: clamp(80px, 12vw, 160px);
