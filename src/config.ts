@@ -6,10 +6,10 @@ export const site = {
   tagline: "things i've watched & things i've saved",
 
   // From letterboxd.com/<username>
-  letterboxdUser: "YOUR_LETTERBOXD_USERNAME",
+  letterboxdUser: "thatdigitalspit",
 
   // From pinterest.com/<username>
-  pinterestUser: "YOUR_PINTEREST_USERNAME",
+  pinterestUser: "all_llyssa",
   // Optional: a board's URL slug (pinterest.com/<username>/<board>) to show only that board.
   // Leave empty to show your most recent pins across all boards.
   pinterestBoard: "",

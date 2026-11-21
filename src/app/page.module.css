@@ -1,0 +1,81 @@
+/* ---------- header ---------- */
+.header {
+  padding: clamp(56px, 10vw, 120px) 0 clamp(40px, 6vw, 72px);
+  text-align: center;
+}
+
+.name {
+  font-size: clamp(1.7rem, 7vw, 5.2rem);
+  letter-spacing: 0.14em;
+  overflow-wrap: break-word;
+}
+
+.tagline {
+  margin: 18px auto 0;
+  max-width: 34ch;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* A hand-ruled line under the header. */
+.rule {
+  width: min(420px, 70%);
+  height: 2px;
+  margin: 28px auto 0;
+  background: var(--ink);
+  opacity: 0.7;
+  transform: rotate(-0.6deg);
+  filter: url(#torn);
+}
+
+/* ---------- sections ---------- */
+.section {
+  position: relative;
+  margin-top: clamp(56px, 9vw, 112px);
+}
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: clamp(1.4rem, 3.6vw, 2.1rem);
+}
+
+/* A dotted leader running from the title to the edge of the page. */
+.sectionHead::after {
+  content: "";
+  flex: 1;
+  min-width: 40px;
+  border-bottom: 2px dotted var(--ink-faint);
+  transform: translateY(-6px);
+}
+
+@media (max-width: 560px) {
+  .sectionHead::after {
+    display: none;
+  }
+}
+
+.sectionNote {
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.placeholder {
+  color: var(--ink-soft);
+}
+
+/* ---------- footer ---------- */
+.footer {
+  margin-top: clamp(80px, 12vw, 160px);
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}

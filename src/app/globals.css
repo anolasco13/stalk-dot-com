@@ -1,0 +1,146 @@
+/* ---------- palette & fonts ---------- */
+:root {
+  --paper: #e9e4da;
+  --paper-edge: #d8d3ca;
+  --paper-dark: #c9c2b5;
+  --ink: #1c1a19;
+  --ink-soft: #4a4540;
+  --ink-faint: #8a8278;
+  --oxblood: #5a1a1c;
+  --gold: #9a8355;
+  --sepia: #8b6b45;
+  --polaroid: #efe9dc;
+
+  /* Swap these to change fonts (see layout.tsx). */
+  --font-heading: var(--font-space-mono), "Courier New", monospace;
+  --font-body: var(--font-space-mono), "Courier New", monospace;
+
+  --page-width: 1180px;
+  --gutter: clamp(16px, 4vw, 48px);
+}
+
+/* ---------- reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- the paper ---------- */
+html {
+  background: var(--paper-edge);
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+
+  /* Layers, top to bottom: stains, crinkles, base color.
+     Everything here scrolls with the page, so it reads as one long sheet. */
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse 260px 200px at 88% 340px, rgba(139, 107, 69, 0.13), transparent 70%),
+    radial-gradient(ellipse 180px 150px at 8% 1250px, rgba(139, 107, 69, 0.1), transparent 70%),
+    radial-gradient(ellipse 120px 90px at 72% 2100px, rgba(28, 26, 25, 0.07), transparent 70%),
+    radial-gradient(circle 70px at 88% 340px, transparent 62px, rgba(139, 107, 69, 0.16) 64px, transparent 68px),
+    /* Crinkles: noise turned into a bumpy surface, lit from the top left.
+       The filter region is pinned to the tile (x/y 0, 100%) so the tiles join with no seam. */
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800'><filter id='c' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.006 0.01' numOctaves='5' seed='11' stitchTiles='stitch'/><feDiffuseLighting lighting-color='%23ffffff' surfaceScale='3.2'><feDistantLight azimuth='120' elevation='52'/></feDiffuseLighting></filter><rect width='100%' height='100%' filter='url(%23c)'/></svg>"),
+    /* Mottling: soft uneven patches, like old paper. */
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='700' height='700'><filter id='m' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.008' numOctaves='3' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.42  0 0 0 0 0.36  0 0 0 0 0.3  0 0 0 0.3 -0.08'/></filter><rect width='100%' height='100%' filter='url(%23m)'/></svg>");
+  background-size: auto, auto, auto, auto, 800px 800px, 700px 700px;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat;
+  background-blend-mode: normal, normal, normal, normal, multiply, normal;
+}
+
+/* Fine grain over everything. */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.32;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.3  0 0 0 0 0.25  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+
+/* Darkened, aged edges. Fixed to the window, like looking at it under a lamp. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background:
+    radial-gradient(ellipse at center, transparent 55%, rgba(60, 48, 36, 0.28) 100%),
+    linear-gradient(to right, rgba(40, 32, 24, 0.12), transparent 6%, transparent 94%, rgba(40, 32, 24, 0.12));
+}
+
+/* ---------- page frame ---------- */
+.page {
+  position: relative;
+  z-index: 3;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter) 96px;
+}
+
+/* ---------- type ---------- */
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  margin: 0;
+  text-shadow: 0 0 1px rgba(28, 26, 25, 0.45);
+}
+
+.ink {
+  filter: url(#ink);
+}
+
+::selection {
+  background: var(--oxblood);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px dashed var(--oxblood);
+  outline-offset: 4px;
+}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
